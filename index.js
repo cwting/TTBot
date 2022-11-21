@@ -24,11 +24,42 @@ client.once('ready', () => {
 
 	// My Test 
   let bellVote = new cron.CronJob('0 0 0 * * *', () => {
-    bot.users.fetch('409686858826514432').then(bellVoteMsg => {
+    client.users.fetch('409686858826514432').then(bellVoteMsg => {
       bellVoteMsg.send('Time to vote :3')
     })
   })
   bellVote.start();
+
+	/* CRONJOB TIMEZONE = UTC */
+  /* ------------------------------- Channels ------------------------------- */
+
+  /*
+      // get channel id
+      const eventCh = bot.channels.cache.get('CH_ID');
+      const event1 = new cron.CronJob('ss mm hh * * *', () => {
+          eventCh.send(`<@&${'ROLE_ID'}>, hi!`);
+      });
+
+      event1.start();
+  */
+
+  /* ------------------------------- DMs ------------------------------- */
+
+  // // Mike 
+  // let mikeVote = new cron.CronJob('0 0 0 * * *', () => {
+  //   bot.users.fetch('245522553173442560').then(mikeVoteMsg => {
+  //     mikeVoteMsg.send('Time to vote :3')
+  //   })
+  // })
+  // mikeVote.start();
+
+  // // Ant
+  // let antVote = new cron.CronJob('0 0 16 * * *', () => {
+  //   bot.users.fetch('518100094839685130').then(antVoteMsg => {
+  //     antVoteMsg.send('Time to vote UwU')
+  //   })
+  // })
+  // antVote.start();
 
 });
 
