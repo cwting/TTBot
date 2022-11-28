@@ -21,7 +21,7 @@ for (const file of commandFiles) {
 // When the client is ready, run this code (only once)
 client.once('ready', () => {
 	console.log('Ready!');
-  client.user.setActivity('UwU');
+  client.user.setActivity('/tthelp');
 
 	/* CRONJOB TIMEZONE = UTC */
   /* ------------------------------- Channels ------------------------------- */
