@@ -21,33 +21,33 @@ for (const file of commandFiles) {
 // When the client is ready, run this code (only once)
 client.once('ready', () => {
 	console.log('Ready!');
-
-	// My Test 
-  let bellVote = new cron.CronJob('0 0 0 * * *', () => {
-    client.users.fetch('409686858826514432').then(bellVoteMsg => {
-      bellVoteMsg.send('Time to vote :3')
-    })
-  })
-  bellVote.start();
+  client.user.setActivity('UwU');
 
 	/* CRONJOB TIMEZONE = UTC */
   /* ------------------------------- Channels ------------------------------- */
 
   /*
-      // get channel id
-      const eventCh = bot.channels.cache.get('CH_ID');
-      const event1 = new cron.CronJob('ss mm hh * * *', () => {
-          eventCh.send(`<@&${'ROLE_ID'}>, hi!`);
-      });
+    // get channel id
+    const eventCh = client.channels.cache.get('CH_ID');
+    const event1 = new cron.CronJob('ss mm hh * * *', () => {
+        eventCh.send(`<@&${'ROLE_ID'}>, hi!`);
+    });
 
-      event1.start();
+    event1.start();
   */
+
+    // HEROIC'S VOTE REMINDER
+    const heroicVoteCh = client.channels.cache.get('1044984117646872636');
+    const heroicVoteReminder = new cron.CronJob('0 0 0 * * *', () => {
+      heroicVoteCh.send(`<@&${'1044610951917342790'}>, it's time to vote!`)
+    });
+    heroicVoteReminder.start();
 
   /* ------------------------------- DMs ------------------------------- */
 
   // // Mike 
   // let mikeVote = new cron.CronJob('0 0 0 * * *', () => {
-  //   bot.users.fetch('245522553173442560').then(mikeVoteMsg => {
+  //   client.users.fetch('245522553173442560').then(mikeVoteMsg => {
   //     mikeVoteMsg.send('Time to vote :3')
   //   })
   // })
@@ -55,12 +55,11 @@ client.once('ready', () => {
 
   // // Ant
   // let antVote = new cron.CronJob('0 0 16 * * *', () => {
-  //   bot.users.fetch('518100094839685130').then(antVoteMsg => {
+  //   client.users.fetch('518100094839685130').then(antVoteMsg => {
   //     antVoteMsg.send('Time to vote UwU')
   //   })
   // })
   // antVote.start();
-
 });
 
 client.on('interactionCreate', async interaction => {
@@ -77,6 +76,15 @@ client.on('interactionCreate', async interaction => {
 		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
 	}
 });
+
+const heroicArray = [`king`, `queen`];
+client.on('messageCreate', async message => {
+  if (message.author.bot) return
+  var heroicChance = Math.random();
+  if (heroicChance <= 0.4 && heroicArray.some(heroic => message.content.toLowerCase().includes(heroic))) {
+    return await message.reply(`No you!`)
+  }
+})
 
 // Login to Discord with your client's token
 client.login(process.env.TOKEN);

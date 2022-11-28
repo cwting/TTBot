@@ -7,6 +7,6 @@ module.exports = {
     .setDMPermission(true),
 
   async execute(interaction) {
-    await interaction.reply(`TTBot is made by TingTongBell~ Feel free  to leave any feedback on discord @Ting#4335.`);
+    await interaction.reply(`TTBot is made by TingTongBell~ Feel free to leave any feedback on discord @Ting#4335.`);
   },
 };
