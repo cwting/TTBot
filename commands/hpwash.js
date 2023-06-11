@@ -14,20 +14,33 @@ module.exports = {
       { name: 'Shadower', value: 'shadower' },
       { name: 'Buccaneer', value: 'buccaneer' },
       { name: 'Corsair', value: 'corsair' },
-      { name: 'Mage', value: 'mage' },
+      { name: 'Magician', value: 'magician' },
     ))
     .addIntegerOption(lvl => lvl.setName(`level`).setDescription(`Enter your level (value between 1 and 200)`).setMinValue(1).setMaxValue(200).setRequired(true))
     .addIntegerOption(mp => mp.setName(`cleanmp`).setDescription(`Enter your clean MP (value between 1 and 30000)`).setMinValue(1).setMaxValue(30000).setRequired(true))
+    .addStringOption(aprPrice => aprPrice.setName(`price`).setDescription(`Select APR Price`).setRequired(false).addChoices(
+      { name: '8.5m', value: '8500000' },
+      { name: '9.0m', value: '9000000' },
+      { name: '9.5m', value: '9500000' },
+      { name: '10.0m', value: '10000000' },
+    ))
     .setDMPermission(true),
 
   async execute(interaction) {
     var job = await interaction.options.getString(`job`);
     var level = await interaction.options.getInteger(`level`);
     var cleanMP = await interaction.options.getInteger(`cleanmp`);
+    var aprPrice = await interaction.options.getString(`price`);
 
     var vote = 8000;
     var aprNX = 3100;
-    var aprMeso = 10000000;
+    var aprMeso = 0;
+
+    if (aprPrice !== null) {
+      aprMeso = parseInt(aprPrice);
+    } else {
+      aprMeso = 9000000;
+    }
 
     switch (job) {
       case 'beginner':
@@ -179,7 +192,7 @@ module.exports = {
           )
         }
 
-      case 'mage':
+      case 'magician':
         var minHPGain = 10;
         var avgHPGain = 15;
         var mpLossS0 = 20;
@@ -214,7 +227,7 @@ module.exports = {
 
     if (cleanMP < minMP) {
       return await interaction.reply(
-        `${cleanMP} ${minMP}Your MP is below the minimum MP for your job. Please check your Clean MP again. ~~~`
+        `${cleanMP} ${minMP}Your MP is below the minimum MP for your job. Please check your Clean MP again.`
       )
     } else {
       return await interaction.reply(
