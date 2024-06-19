@@ -8,6 +8,6 @@ module.exports = {
     .setDMPermission(true),
 
   async execute(interaction) {
-    await interaction.reply(`https://cwting.github.io/crewmate/index.html`);
+    await interaction.reply(`https://cwting.github.io/TTBot`);
   },
 };

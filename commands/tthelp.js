@@ -23,6 +23,9 @@ List of commands:
 /gpqs3guide
 /hpwash
 /leech
+/palaht
+/palant
+/palazak
 /tthelp
 /zakum
 
