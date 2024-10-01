@@ -4,10 +4,11 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName(`hpwash`)
     .setDescription(`Calculates your HP gain`)
-    .addStringOption(job => job.setName(`job`).setDescription(`Enter your class`).setRequired(true).addChoices(
+    .addStringOption(job => job.setName(`job`).setDescription(`Enter your job`).setRequired(true).addChoices(
       { name: 'Beginner', value: 'beginner' },
       { name: 'Dark Knight', value: 'dark knight' },
       { name: 'Hero', value: 'hero' },
+      { name: 'Paladin', value: 'paladin' },
       { name: 'Bowmaster', value: 'bowmaster' },
       { name: 'Marksman', value: 'marksman' },
       { name: 'Night Lord', value: 'night lord' },
@@ -16,13 +17,17 @@ module.exports = {
       { name: 'Corsair', value: 'corsair' },
       { name: 'Magician', value: 'magician' },
     ))
-    .addIntegerOption(lvl => lvl.setName(`level`).setDescription(`Enter your level (value between 1 and 200)`).setMinValue(1).setMaxValue(200).setRequired(true))
-    .addIntegerOption(mp => mp.setName(`cleanmp`).setDescription(`Enter your clean MP (value between 1 and 30000)`).setMinValue(1).setMaxValue(30000).setRequired(true))
-    .addStringOption(aprPrice => aprPrice.setName(`price`).setDescription(`Select APR Price`).setRequired(false).addChoices(
+    .addIntegerOption(level => level.setName(`level`).setDescription(`Enter your level (value between 1 and 200)`).setMinValue(1).setMaxValue(200).setRequired(true))
+    .addIntegerOption(cleanMP => cleanMP.setName(`cleanmp`).setDescription(`Enter your clean MP (value between 1 and 30000)`).setMinValue(1).setMaxValue(30000).setRequired(true))
+    .addStringOption(aprPrice => aprPrice.setName(`aprprice`).setDescription(`Select APR Price`).setRequired(false).addChoices(
       { name: '8.5m', value: '8500000' },
       { name: '9.0m', value: '9000000' },
       { name: '9.5m', value: '9500000' },
       { name: '10.0m', value: '10000000' },
+      { name: '10.5m', value: '10500000' },
+      { name: '11.0m', value: '11000000' },
+      { name: '11.5m', value: '11500000' },
+      { name: '12.0m', value: '12000000' },
     ))
     .setDMPermission(true),
 
@@ -30,7 +35,7 @@ module.exports = {
     var job = await interaction.options.getString(`job`);
     var level = await interaction.options.getInteger(`level`);
     var cleanMP = await interaction.options.getInteger(`cleanmp`);
-    var aprPrice = await interaction.options.getString(`price`);
+    var aprPrice = await interaction.options.getString(`aprprice`);
 
     var vote = 8000;
     var aprNX = 3100;
@@ -39,7 +44,7 @@ module.exports = {
     if (aprPrice !== null) {
       aprMeso = parseInt(aprPrice);
     } else {
-      aprMeso = 9000000;
+      aprMeso = 11000000;
     }
 
     switch (job) {
@@ -48,7 +53,7 @@ module.exports = {
         var avgHPGain = 10;
         var mpLoss = 8;
         var minMP = (10 * level) + 2;
-        var extraMP = cleanMP - minMP
+        var extraMP = cleanMP - minMP;
         var numOfWash = Math.floor(extraMP / mpLoss);
         var minHPGained = numOfWash * minHPGain;
         var avgHPGained = numOfWash * avgHPGain;
@@ -59,7 +64,7 @@ module.exports = {
         var avgHPGain = 52;
         var mpLoss = 4;
         var minMP = (4 * level) + 156;
-        var extraMP = cleanMP - minMP
+        var extraMP = cleanMP - minMP;
         var numOfWash = Math.floor(extraMP / mpLoss);
         var minHPGained = numOfWash * minHPGain;
         var avgHPGained = numOfWash * avgHPGain;
@@ -70,7 +75,7 @@ module.exports = {
         var avgHPGain = 52;
         var mpLoss = 4;
         var minMP = (4 * level) + 56;
-        var extraMP = cleanMP - minMP
+        var extraMP = cleanMP - minMP;
         var numOfWash = Math.floor(extraMP / mpLoss);
         var minHPGained = numOfWash * minHPGain;
         var avgHPGained = numOfWash * avgHPGain;
@@ -81,7 +86,7 @@ module.exports = {
         var avgHPGain = 52;
         var mpLoss = 4;
         var minMP = (4 * level) + 156;
-        var extraMP = cleanMP - minMP
+        var extraMP = cleanMP - minMP;
         var numOfWash = Math.floor(extraMP / mpLoss);
         var minHPGained = numOfWash * minHPGain;
         var avgHPGained = numOfWash * avgHPGain;
@@ -93,7 +98,7 @@ module.exports = {
         var avgHPGain = 18;
         var mpLoss = 12;
         var minMP = (14 * level) + 148;
-        var extraMP = cleanMP - minMP
+        var extraMP = cleanMP - minMP;
         var numOfWash = Math.floor(extraMP / mpLoss);
         var minHPGained = numOfWash * minHPGain;
         var avgHPGained = numOfWash * avgHPGain;
@@ -103,7 +108,7 @@ module.exports = {
       case 'shadower':
         var mpLoss = 12;
         var minMP = (14 * level) + 148;
-        var extraMP = cleanMP - minMP
+        var extraMP = cleanMP - minMP;
         var numOfWash = Math.floor(extraMP / mpLoss);
         // fresh
         var minHPGainFresh = 20;
@@ -135,7 +140,7 @@ module.exports = {
       case 'buccaneer':
         var mpLoss = 16;
         var minMP = (18 * level) + 111;
-        var extraMP = cleanMP - minMP
+        var extraMP = cleanMP - minMP;
         var numOfWash = Math.floor(extraMP / mpLoss);
         // fresh
         var minHPGainFresh = 36;
@@ -165,7 +170,7 @@ module.exports = {
       case 'corsair':
         var mpLoss = 16;
         var minMP = (18 * level) + 111;
-        var extraMP = cleanMP - minMP
+        var extraMP = cleanMP - minMP;
         var numOfWash = Math.floor(extraMP / mpLoss);
         // fresh
         var minHPGainFresh = 16;
@@ -198,12 +203,12 @@ module.exports = {
         var mpLossS0 = 20;
         var mpLossS10 = 30;
         var minMP = (22 * level) + 488;
-        var extraMP = cleanMP - minMP
-        // Improved MapMP = 0
+        var extraMP = cleanMP - minMP;
+        // Improved MaxMP = 0
         var numOfWashS0 = Math.floor(extraMP / mpLossS0);
         var minHPGainedS0 = numOfWashS0 * minHPGain;
         var avgHPGainedS0 = numOfWashS0 * avgHPGain;
-        // Improved MapMP = 10
+        // Improved MaxMP = 10
         var numOfWashS10 = Math.floor(extraMP / mpLossS10);
         var minHPGainedS10 = numOfWashS10 * minHPGain;
         var avgHPGainedS10 = numOfWashS10 * avgHPGain;

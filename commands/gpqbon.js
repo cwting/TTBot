@@ -9,7 +9,8 @@ module.exports = {
 
   async execute(interaction) {
     var gpqbonguide = [
-      { attachment: `https://i.ibb.co/Jm33f7S/gpq-bon.png` }
+      // { attachment: `https://i.ibb.co/Jm33f7S/gpq-bon.png` }
+      { attachment: `https://imgur.com/S7CiGNC.png` }
     ]
     await interaction.deferReply();
     await wait(3000);

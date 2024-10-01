@@ -13,6 +13,7 @@ List of commands:
 /ap
 /apq
 /ask
+/calcnx
 /channel
 /choose
 /coinflip
@@ -23,6 +24,7 @@ List of commands:
 /gpqs3guide
 /hpwash
 /leech
+/mpwash (WIP)
 /palaht
 /palant
 /palazak
