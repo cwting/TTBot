@@ -1,0 +1,9 @@
+
+node_modules/@discordjs/builders/dist/index.d.mts
+/node_modules
+/node_modules/@discordjs/builders
+node_modules/ws/LICENSE
+/node_modules
+*.mjs
+node_modules/@discordjs/builders/CHANGELOG.md
+node_modules/@discordjs/util/CHANGELOG.md
